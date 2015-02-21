@@ -25,6 +25,15 @@ if ! [ -L /var/www ]; then
   ln -fs /vagrant /var/www
 fi
 
+# enable mod-rewrite
+if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]; then
+  pushd /etc/apache2/mods-enabled
+  ln -fs ../mods-available/rewrite.load
+  popd
+  # restart web server
+  /etc/init.d/apache2 restart
+fi
+
 # install PHP Composer
 if ! [ -f /usr/local/bin/composer ]; then
   curl -sS https://getcomposer.org/installer | php
