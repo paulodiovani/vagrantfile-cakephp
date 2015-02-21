@@ -4,6 +4,16 @@ This repository contain a `Vagrantfile` and a `bootstrap.sh`
 for creating a vagrant environment for CakePHP (and problably
 will work for other PHP frameworks).
 
+## Usage
+
+Of course, you must have [Vagrant](https://www.vagrantup.com/) installed.
+
+```bash
+git clone https://github.com/paulodiovani/vagrantfile-cakephp.git wheezy32-cakephp
+cd wheezy32-cakephp
+vagrant up
+```
+
 ## Installed software
 
 * Apache 2.2
