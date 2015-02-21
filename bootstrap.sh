@@ -3,8 +3,9 @@
 # install everything we need
 aptitude update
 
-aptitude install -y git build-essential \
-  mysql-server mysql-client \
+DEBIAN_FRONTEND=noninteractive aptitude install -y \
+  git build-essential curl \
+  mysql-server \
   apache2 imagemagick \
   php5 php5-curl php5-gd php5-imagick php5-json \
   php5-mcrypt php5-mysql php5-sqlite php5-xdebug \
@@ -16,6 +17,13 @@ if ! [ -L /var/www ]; then
   ln -fs /vagrant /var/www
 fi
 
-# (re)start services
+# install PHP Composer
+if ! [ -f /usr/local/bin/composer ]; then
+  curl -sS https://getcomposer.org/installer | php
+  mv composer.phar /usr/local/bin/composer
+  chmod +x /usr/local/bin/composer
+fi
+
+# start services
 /etc/init.d/mysql start
-/etc/init.d/apache2 restart
+/etc/init.d/apache2 start
