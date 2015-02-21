@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
 
-# install everything we need
+# update apt database
 aptitude update
 
+# debconf selections
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/mysql/admin-pass password root'
+debconf-set-selections <<< 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'
+
+# install everything we need
 DEBIAN_FRONTEND=noninteractive aptitude install -y \
-  git build-essential curl \
+  debconf-utils build-essential \
+  vim git curl \
   mysql-server \
   apache2 imagemagick \
   php5 php5-curl php5-gd php5-imagick php5-json \
   php5-mcrypt php5-mysql php5-sqlite php5-xdebug \
-  php-pear
+  php-pear phpmyadmin
 
 # link /var/www to vagrant folder 
 if ! [ -L /var/www ]; then
