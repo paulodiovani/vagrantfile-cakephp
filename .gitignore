@@ -1,1 +1,6 @@
+# vagrant cache
 .vagrant
+
+# ignore everything, as this may be
+# an Apache DocumentRoot
+**/*
