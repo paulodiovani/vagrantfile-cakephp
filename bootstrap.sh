@@ -22,7 +22,7 @@ DEBIAN_FRONTEND=noninteractive aptitude install -y \
 # link /var/www to vagrant folder 
 if ! [ -L /var/www ]; then
   rm -rf /var/www
-  ln -fs /vagrant /var/www
+  ln -fs /vagrant/www /var/www
 fi
 
 # enable mod-rewrite

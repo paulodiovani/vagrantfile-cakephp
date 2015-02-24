@@ -18,7 +18,7 @@ vagrant up
 
 * Apache 2.2
   * running on host port 8080
-  * `DocumentRoot` is `/var/www`, wich is a symbolic link to `/vagrant`
+  * `DocumentRoot` is `/var/www`, wich is a symbolic link to `/vagrant/www`
 
 * Git
 

@@ -3,4 +3,4 @@
 
 # ignore everything, as this may be
 # an Apache DocumentRoot
-**/*
+www/**/*
