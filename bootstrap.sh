@@ -41,6 +41,19 @@ if ! [ -f /usr/local/bin/composer ]; then
   chmod +x /usr/local/bin/composer
 fi
 
+# change apache user to vagrant
+if grep -q 'APACHE_RUN_USER=www-data' /etc/apache2/envvars; then
+  sed -i 's/APACHE_RUN_USER=www-data/APACHE_RUN_USER=vagrant/' /etc/apache2/envvars
+fi
+
+# change apache group to vagrant
+if grep -c 'APACHE_RUN_GROUP=www-data' /etc/apache2/envvars; then
+  sed -i 's/APACHE_RUN_GROUP=www-data/APACHE_RUN_GROUP=vagrant/' /etc/apache2/envvars
+fi
+
+# change owner of /var/lock/apache2
+chown -R vagrant:www-data /var/lock/apache2
+
 # start services
-/etc/init.d/mysql start
-/etc/init.d/apache2 start
+/etc/init.d/mysql restart
+/etc/init.d/apache2 restart
